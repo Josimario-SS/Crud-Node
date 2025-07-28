@@ -1,0 +1,35 @@
+{{#unless error}}  <!--O QUE ACONTECE SE A CONDIÇÃO FOR FALSA-->
+
+<div class="bg-body-tertiary p-5 rounded mt-3"> 
+    <h1 class="teste">Editar</h1> 
+
+    <form action="/update" method="post">
+        <div class="row mt-5">
+
+            <div class="col-md-5 mb-3">
+                <label for="nome" class="form-label">Nome completo</label>
+                <input type="hidden" value="{{id}}" name="id">
+                <input value="{{nome}}" type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" required>
+            </div>
+
+            <div class="col-md-5">
+                <label for="email" class="form-label">Endereço de e-mail</label>
+                <input value="{{email}}" type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn w-100 p-3 mt-4 btn-warning">Salvar Alterações</button>
+            </div>
+
+        </div>
+    </form> 
+</div>
+
+{{else}}
+<div class="w-75 m-auto p-3 mt-4 card bg-danger text-white text-center">
+    <div class="card-body fw-bold">
+        Houve um problema: {{problema}}
+    </div>
+</div>
+
+{{/unless}}

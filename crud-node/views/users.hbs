@@ -1,0 +1,73 @@
+<div class="p-3 rounded mt-3">
+    <h1 class="teste ms-2">Listar Usuários</h1>
+
+    {{#if table}} <!--SE HOUVER ALGUM DADO NO BANCO DE DADOS ELE IRÁ RENDERIZAR A TABELA-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios}}
+            <tr class="pe-1">
+                <th scope="row">{{id}}</th>
+                    <td>{{nome}}</td>
+                    <td class="text-break">{{email}}</td>
+                <td>
+                    <div class="column">
+                        <div class="row-6 row-cols-md-3 row-cols-lg-4 w-100">
+                            <form action="/editar" method="post" class="w-100">
+                                <input type="hidden" name="id" value="{{id}}">
+                                <button class="btn btn-info w-100">Editar</button>
+                            </form>
+
+                        </div>
+
+                        <div class="row-6 row-cols-md-3 row-cols-lg-4 mt-1 w-100">
+                            <button data-bs-toggle="modal" data-bs-target="#deleteModal_{{id}}" class="btn btn-danger w-100">Deletar</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal_{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body fw-bold text-danger">
+                            Tem certeza que quer deletar o usuário {{nome}}?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/del" method="post">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <button type="submit" class="btn btn-danger">Sim, quero deletar</button>
+                            </form>
+
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}} <!--SENÃO ELE IRÁ MOSTRAR A SEGUINTE MENSAGEM-->
+    <div class="card mt-4">
+        <div class="card-body">
+            Nenhum dado encontrado!
+        </div>
+    </div>
+
+    {{/if}}
+
+
+</div>
